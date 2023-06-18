@@ -37,23 +37,13 @@ jieba
 
 主要功能
 =======
-1. 分词
---------
-* `jieba.cut` 方法接受四个输入参数: 需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型；use_paddle 参数用来控制是否使用paddle模式下的分词模式，paddle模式采用延迟加载方式，通过enable_paddle接口安装paddlepaddle-tiny，并且import相关代码；
-* `jieba.cut_for_search` 方法接受两个参数：需要分词的字符串；是否使用 HMM 模型。该方法适合用于搜索引擎构建倒排索引的分词，粒度比较细
-* 待分词的字符串可以是 unicode 或 UTF-8 字符串、GBK 字符串。注意：不建议直接输入 GBK 字符串，可能无法预料地错误解码成 UTF-8
-* `jieba.cut` 以及 `jieba.cut_for_search` 返回的结构都是一个可迭代的 generator，可以使用 for 循环来获得分词后得到的每一个词语(unicode)，或者用
-* `jieba.lcut` 以及 `jieba.lcut_for_search` 直接返回 list
-* `jieba.Tokenizer(dictionary=DEFAULT_DICT)` 新建自定义分词器，可用于同时使用不同词典。`jieba.dt` 为默认分词器，所有全局分词相关函数都是该分词器的映射。
-
-代码示例
 
 ```python
 # encoding=utf-8
 import jieba
 
 jieba.enable_paddle()# 启动paddle模式。 0.40版之后开始支持，早期版本不支持
-strs=["我来到北京清华大学","乒乓球拍卖完了","中国科学技术大学"]
+strs=["我来到北京清华大学","中国科学技术大学"]
 for str in strs:
     seg_list = jieba.cut(str,use_paddle=True) # 使用paddle模式
     print("Paddle Mode: " + '/'.join(list(seg_list)))
